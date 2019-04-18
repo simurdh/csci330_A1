@@ -4,50 +4,48 @@ CSCI 330 Assignment 1
 */
 
 
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 public class DataMining {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws FileNotFoundException {
 
-    Scanner sc = null;
-
-    try {
-      File f = new File(args[1]); //where is file passed in? try catch?
-      sc = new Scanner(f);
-    } catch (FileNotFoundException exc) {
-      System.out.println("Could not find file " + args[1]);
-    }
-
+    File f = new File("Stockmarket-1990-2015.txt");
+    Scanner sc = new Scanner(f);
 
     while (sc.hasNextLine()) {
 
-      CompanyData data = new CompanyData(sc.next());
-      String currentLine = sc.nextLine();
+      String currentLine = new String();
+      currentLine = sc.nextLine();
+      String[] lineArr = new String[currentLine.length()];
+      lineArr = currentLine.split("\t");
 
+      CompanyData data = new CompanyData(lineArr[0]);
+      System.out.println("lineArr[0] = " + lineArr[0]);
 
-      while (currentLine.contains(data.getCompany())) {
+      if (lineArr[0] == data.getCompany() && sc.hasNextLine()) {
 
-        Scanner line = new Scanner(currentLine);
-
-        line.next();
-        String date = line.next();
-        double open = line.nextDouble();
-        double hx = line.nextDouble();
-        double lx = line.nextDouble();
-        double close = line.nextDouble();
-
-        System.out.println("date = " + date);
+        String date = lineArr[1];
+        double open = Double.valueOf(lineArr[2]);
+        double hx = Double.valueOf(lineArr[3]);
+        double lx = Double.valueOf(lineArr[4]);
+        double close = Double.valueOf(lineArr[5]);
+        int numShares = Integer.valueOf(lineArr[6]);
+        double adjustedClose = Double.valueOf(lineArr[7]);
 
         //calculate crazy days
 
+        //calculate split
 
-        currentLine = sc.nextLine();
+      } else {
+        //print prev obj
+
+        //create new obj
+        CompanyData data = new CompanyData(lineArr[0]);
       }
-
     }
-
   }
 }

@@ -16,5 +16,8 @@ public class CompanyData {
   //add crazy day
 
   //return crazy days
+  public void printCrazyDays() {
+
+  }
 
 }
