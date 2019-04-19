@@ -8,6 +8,7 @@ CSCI 330 Assignment 1
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.*;
 
 public class DataMining {
 
@@ -16,6 +17,9 @@ public class DataMining {
     File f = new File("Stockmarket-1990-2015.txt");
     Scanner sc = new Scanner(f);
 
+    HashMap<String, CompanyData> data = new HashMap<>();
+
+
     while (sc.hasNextLine()) {
 
       String currentLine = new String();
@@ -23,10 +27,10 @@ public class DataMining {
       String[] lineArr = new String[currentLine.length()];
       lineArr = currentLine.split("\t");
 
-      CompanyData data = new CompanyData(lineArr[0]);
+      data.put(lineArr[0], new CompanyData(lineArr[0]));
       System.out.println("lineArr[0] = " + lineArr[0]);
 
-      if (lineArr[0] == data.getCompany() && sc.hasNextLine()) {
+      if (data.containsKey(lineArr[0]) && sc.hasNextLine()) {
 
         String date = lineArr[1];
         double open = Double.valueOf(lineArr[2]);
@@ -41,10 +45,10 @@ public class DataMining {
         //calculate split
 
       } else {
-        //print prev obj
-
         //create new obj
-        CompanyData data = new CompanyData(lineArr[0]);
+        data.put(lineArr[0], new CompanyData(lineArr[0]));
+
+        // CompanyData company = new CompanyData(lineArr[0]);
       }
     }
   }
