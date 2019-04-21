@@ -19,6 +19,13 @@ public class DataMining {
 
     HashMap<String, CompanyData> data = new HashMap<>();
 
+    double open;
+    double hx;
+    double lx;
+    double close;
+    int numShares;
+    double adjustedClose;
+
 
     while (sc.hasNextLine()) {
 
@@ -28,19 +35,27 @@ public class DataMining {
       lineArr = currentLine.split("\t");
 
       data.put(lineArr[0], new CompanyData(lineArr[0]));
-      System.out.println("lineArr[0] = " + lineArr[0]);
+      // System.out.println("lineArr[0] = " + lineArr[0]);
 
       if (data.containsKey(lineArr[0]) && sc.hasNextLine()) {
 
         String date = lineArr[1];
-        double open = Double.valueOf(lineArr[2]);
-        double hx = Double.valueOf(lineArr[3]);
-        double lx = Double.valueOf(lineArr[4]);
-        double close = Double.valueOf(lineArr[5]);
-        int numShares = Integer.valueOf(lineArr[6]);
-        double adjustedClose = Double.valueOf(lineArr[7]);
+        open = Double.valueOf(lineArr[2]);
+        hx = Double.valueOf(lineArr[3]);
+        lx = Double.valueOf(lineArr[4]);
+        close = Double.valueOf(lineArr[5]);
+        numShares = Integer.valueOf(lineArr[6]);
+        adjustedClose = Double.valueOf(lineArr[7]);
 
         //calculate crazy days
+        //(Hx-Lx)/Hx >= 15%
+        double percent = (hx - lx)/hx;
+        // System.out.println("percent = " + percent);
+        if (percent >= 0.15) {
+          data.get(lineArr[0]).addCrazyDay(date, percent);
+          data.get(lineArr[0]).getCrazyDays();
+        }
+
 
         //calculate split
 
@@ -50,6 +65,11 @@ public class DataMining {
 
         // CompanyData company = new CompanyData(lineArr[0]);
       }
+    }
+
+    for (CompanyData company : data.values()) {
+      System.out.println("Processing: " + company.getCompany());
+      company.getCrazyDays();
     }
   }
 }

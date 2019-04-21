@@ -1,8 +1,11 @@
 
+import java.util.*;
+
 public class CompanyData {
 
   //Instance Variables
   String ticker;
+  HashMap<String, Double> crazyD = new HashMap<>();
 
   //Constructor
   public CompanyData(String ticker) {
@@ -13,11 +16,18 @@ public class CompanyData {
     return ticker;
   }
 
-  //add crazy day
+  //add crazy days
+  public void addCrazyDay(String date, double p) {
+    crazyD.put(date, p);
+    System.out.println("crazy day added in " + ticker);
+
+  }
 
   //return crazy days
-  public void printCrazyDays() {
-
+  public void getCrazyDays() {
+    for (Map.Entry<String, Double> day : crazyD.entrySet()) {
+      System.out.println("Crazy day: " + day.getKey() + "\t" + day.getValue());
+    }
   }
 
 }
