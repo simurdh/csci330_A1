@@ -26,6 +26,14 @@ public class DataMining {
     int numShares;
     double adjustedClose;
 
+    String line = new String();
+    line = sc.nextLine();
+    String[] lineA = new String[line.length()];
+    lineA = line.split("\t");
+
+    data.put(lineA[0], new CompanyData(lineA[0]));
+    // System.out.println("entryset: " + data.entrySet());
+
 
     while (sc.hasNextLine()) {
 
@@ -34,10 +42,8 @@ public class DataMining {
       String[] lineArr = new String[currentLine.length()];
       lineArr = currentLine.split("\t");
 
-      data.put(lineArr[0], new CompanyData(lineArr[0]));
-      // System.out.println("lineArr[0] = " + lineArr[0]);
 
-      if (data.containsKey(lineArr[0]) && sc.hasNextLine()) {
+      if (data.containsKey(lineArr[0])) {
 
         String date = lineArr[1];
         open = Double.valueOf(lineArr[2]);
@@ -53,23 +59,29 @@ public class DataMining {
         // System.out.println("percent = " + percent);
         if (percent >= 0.15) {
           data.get(lineArr[0]).addCrazyDay(date, percent);
-          data.get(lineArr[0]).getCrazyDays();
+          // data.get(lineArr[0]).getCrazyDays();
         }
 
 
         //calculate split
 
       } else {
-        //create new obj
-        data.put(lineArr[0], new CompanyData(lineArr[0]));
+        // System.out.println("current ticker: " + lineArr[0]);
 
+        //create new obj
+
+        data.put(lineArr[0], new CompanyData(lineArr[0]));
+        // System.out.println("created new obj: " + data.get(lineArr[0]) + "\n");
         // CompanyData company = new CompanyData(lineArr[0]);
       }
+
+
     }
 
     for (CompanyData company : data.values()) {
       System.out.println("Processing: " + company.getCompany());
       company.getCrazyDays();
     }
+    // System.out.println("entryset: " + data.entrySet());
   }
 }

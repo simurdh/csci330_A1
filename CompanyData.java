@@ -10,6 +10,7 @@ public class CompanyData {
   //Constructor
   public CompanyData(String ticker) {
     this.ticker = ticker;
+    System.out.println("obj created: " + ticker);
   }
 
   public String getCompany() {
@@ -19,7 +20,7 @@ public class CompanyData {
   //add crazy days
   public void addCrazyDay(String date, double p) {
     crazyD.put(date, p);
-    System.out.println("crazy day added in " + ticker);
+    // System.out.println("crazy day added in " + ticker);
 
   }
 
@@ -28,6 +29,7 @@ public class CompanyData {
     for (Map.Entry<String, Double> day : crazyD.entrySet()) {
       System.out.println("Crazy day: " + day.getKey() + "\t" + day.getValue());
     }
+    // System.out.println(crazyD.entrySet());
   }
 
 }
