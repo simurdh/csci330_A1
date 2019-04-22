@@ -1,9 +1,7 @@
 /* Hannah Simurdak
-04/14/2019
+04/22/2019
 CSCI 330 Assignment 1
 */
-
-
 
 import java.util.Scanner;
 import java.io.File;
@@ -33,7 +31,6 @@ public class DataMining {
 
     data.put(lineA[0], new CompanyData(lineA[0]));
     tickerList.add(lineA[0]);
-    // System.out.println("entryset: " + data.entrySet());
 
     Double open = Double.valueOf(lineA[5]);
 
@@ -68,11 +65,9 @@ public class DataMining {
       //calculate crazy days
       //(Hx-Lx)/Hx >= 15%
       double percent = (hx - lx)/hx;
-      // System.out.println("percent = " + percent);
       if (percent >= 0.15) {
         percent = percent*100;
         data.get(lineArr[0]).addCrazyDay(date, Math.round(percent*100.0)/100.0);
-        // data.get(lineArr[0]).getCrazyDays();
       }
     }
 
@@ -84,16 +79,7 @@ public class DataMining {
       data.get(company).getCrazyDays();
       data.get(company).getSplitDays();
     }
-
-    // for (CompanyData company : data.values()) {
-    //   System.out.println("Processing: " + company.getCompany());
-    //   System.out.println("======================");
-    //   company.getCrazyDays();
-    //   company.getSplitDays();
-    // }
-    // System.out.println("entryset: " + data.entrySet());
   }
-
 
   public static String calcSplitDay(Double C, Double O) {
     if (Math.abs(C/O - 2.0) < 0.05) {

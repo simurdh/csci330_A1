@@ -1,3 +1,7 @@
+/* Hannah Simurdak
+04/22/2019
+CSCI 330 Assignment 1
+*/
 
 import java.util.*;
 
@@ -7,7 +11,6 @@ public class CompanyData {
   private String ticker;
   private LinkedHashMap<String, Double> crazyD = new LinkedHashMap<>();
   private LinkedHashMap<String, String> splitD = new LinkedHashMap<>();
-
 
   //Constructor
   public CompanyData(String ticker) {
@@ -25,6 +28,7 @@ public class CompanyData {
 
   //return crazy days
   public void getCrazyDays() {
+
     //calculate craziest day
     double crazyVal = 0.0;
     String crazyString = "";
@@ -38,6 +42,7 @@ public class CompanyData {
         crazyString = day.getKey();
       }
     }
+
     System.out.println("Total crazy days = " + count);
     if (count != 0) {
       System.out.println("craziest day : " + crazyString + "\t" + crazyVal + "\n");
@@ -46,7 +51,7 @@ public class CompanyData {
     }
   }
 
-  //add crazy days
+  //add split days
   public void addSplitDay(String date, String info) {
     splitD.put(date, info);
   }
