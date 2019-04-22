@@ -6,11 +6,12 @@ public class CompanyData {
   //Instance Variables
   String ticker;
   HashMap<String, Double> crazyD = new HashMap<>();
+  HashMap<String, Double> splitD = new HashMap<>();
 
   //Constructor
   public CompanyData(String ticker) {
     this.ticker = ticker;
-    System.out.println("obj created: " + ticker);
+    // System.out.println("obj created: " + ticker);
   }
 
   public String getCompany() {
@@ -26,10 +27,47 @@ public class CompanyData {
 
   //return crazy days
   public void getCrazyDays() {
+    //calculate craziest day
+    double crazyVal = 0.0;
+    String crazyString = "";
+    int count = 0;
+
     for (Map.Entry<String, Double> day : crazyD.entrySet()) {
       System.out.println("Crazy day: " + day.getKey() + "\t" + day.getValue());
+      count++;
+      if (day.getValue() > crazyVal) {
+        crazyVal = day.getValue();
+        crazyString = day.getKey();
+      }
     }
-    // System.out.println(crazyD.entrySet());
+    System.out.println("Total crazy days = " + count);
+    if (count != 0) {
+      System.out.println("craziest day : " + crazyString + "\t" + crazyVal + "\n");
+    } else {
+      System.out.println("");
+    }
+
   }
+
+  //add crazy days
+  public void addSplitDay(String date, String info) {
+    splitD.put(date, info);
+  }
+
+  public void getSplitDays() {
+
+    int count = 0;
+
+    for (Map.Entry<String, String> day : splitD.entrySet()) {
+      System.out.println();
+      count++;
+
+      }
+      System.out.println("Total number of splits: " + count);
+
+    }
+
+  }
+
 
 }

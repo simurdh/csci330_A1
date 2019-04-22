@@ -13,7 +13,7 @@ import java.util.*;
 public class DataMining {
 
   public static void main(String[] args) throws FileNotFoundException {
-
+    a = 2;
     File f = new File("Stockmarket-1990-2015.txt");
     Scanner sc = new Scanner(f);
 
@@ -34,6 +34,8 @@ public class DataMining {
     data.put(lineA[0], new CompanyData(lineA[0]));
     // System.out.println("entryset: " + data.entrySet());
 
+    Double closeX = Double.valueOf(lineA[5]);
+    Double openX1;
 
     while (sc.hasNextLine()) {
 
@@ -80,8 +82,21 @@ public class DataMining {
 
     for (CompanyData company : data.values()) {
       System.out.println("Processing: " + company.getCompany());
+      System.out.println("======================");
       company.getCrazyDays();
     }
     // System.out.println("entryset: " + data.entrySet());
+  }
+
+  public static String calcSplitDay(Double C, Double O) {
+    if (Math.abs(C/O - 2.0) < 0.05) {
+      return "2:1";
+    } else if (Math.abs(C/O - 3.0) < 0.05) {
+      return "3:1";
+    } else if (Math.abs(C/O - 1.5) < 0.05) {
+      return "3:2";
+    } else {
+      return null;
+    }
   }
 }
