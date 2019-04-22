@@ -5,14 +5,13 @@ public class CompanyData {
 
   //Instance Variables
   private String ticker;
-  private HashMap<String, Double> crazyD = new HashMap<>();
-  private HashMap<String, String> splitD = new HashMap<>();
-  
+  private LinkedHashMap<String, Double> crazyD = new LinkedHashMap<>();
+  private LinkedHashMap<String, String> splitD = new LinkedHashMap<>();
+
 
   //Constructor
   public CompanyData(String ticker) {
     this.ticker = ticker;
-    // System.out.println("obj created: " + ticker);
   }
 
   public String getCompany() {
@@ -22,8 +21,6 @@ public class CompanyData {
   //add crazy days
   public void addCrazyDay(String date, double p) {
     crazyD.put(date, p);
-    // System.out.println("crazy day added in " + ticker);
-
   }
 
   //return crazy days
@@ -47,7 +44,6 @@ public class CompanyData {
     } else {
       System.out.println("");
     }
-
   }
 
   //add crazy days

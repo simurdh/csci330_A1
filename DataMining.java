@@ -39,8 +39,6 @@ public class DataMining {
 
     while (sc.hasNextLine()) {
 
-
-
       String currentLine = new String();
       currentLine = sc.nextLine();
       String[] lineArr = new String[currentLine.length()];
@@ -77,8 +75,8 @@ public class DataMining {
         // data.get(lineArr[0]).getCrazyDays();
       }
     }
+
     Collections.sort(tickerList);
-    System.out.println(tickerList);
 
     for (String company : tickerList) {
       System.out.println("Processing: " + company);
@@ -95,6 +93,7 @@ public class DataMining {
     // }
     // System.out.println("entryset: " + data.entrySet());
   }
+
 
   public static String calcSplitDay(Double C, Double O) {
     if (Math.abs(C/O - 2.0) < 0.05) {
