@@ -6,7 +6,7 @@ public class CompanyData {
   //Instance Variables
   String ticker;
   HashMap<String, Double> crazyD = new HashMap<>();
-  HashMap<String, Double> splitD = new HashMap<>();
+  HashMap<String, String> splitD = new HashMap<>();
 
   //Constructor
   public CompanyData(String ticker) {
@@ -61,13 +61,7 @@ public class CompanyData {
     for (Map.Entry<String, String> day : splitD.entrySet()) {
       System.out.println();
       count++;
-
-      }
-      System.out.println("Total number of splits: " + count);
-
     }
-
+    System.out.println("Total number of splits: " + count);
   }
-
-
 }
