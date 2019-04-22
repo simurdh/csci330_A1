@@ -4,9 +4,10 @@ import java.util.*;
 public class CompanyData {
 
   //Instance Variables
-  String ticker;
-  HashMap<String, Double> crazyD = new HashMap<>();
-  HashMap<String, String> splitD = new HashMap<>();
+  private String ticker;
+  private HashMap<String, Double> crazyD = new HashMap<>();
+  private HashMap<String, String> splitD = new HashMap<>();
+  
 
   //Constructor
   public CompanyData(String ticker) {
@@ -59,9 +60,9 @@ public class CompanyData {
     int count = 0;
 
     for (Map.Entry<String, String> day : splitD.entrySet()) {
-      System.out.println();
+      System.out.println(day.getValue());
       count++;
     }
-    System.out.println("Total number of splits: " + count);
+    System.out.println("Total number of splits: " + count + "\n");
   }
 }

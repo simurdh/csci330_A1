@@ -17,13 +17,14 @@ public class DataMining {
     Scanner sc = new Scanner(f);
 
     HashMap<String, CompanyData> data = new HashMap<>();
+    ArrayList<String> tickerList = new ArrayList<>();
 
-    double open;
+    double close;
     double hx;
     double lx;
-    double close;
     int numShares;
     double adjustedClose;
+    String split;
 
     String line = new String();
     line = sc.nextLine();
@@ -31,12 +32,14 @@ public class DataMining {
     lineA = line.split("\t");
 
     data.put(lineA[0], new CompanyData(lineA[0]));
+    tickerList.add(lineA[0]);
     // System.out.println("entryset: " + data.entrySet());
 
-    Double closeX = Double.valueOf(lineA[5]);
-    Double openX1;
+    Double open = Double.valueOf(lineA[5]);
 
     while (sc.hasNextLine()) {
+
+
 
       String currentLine = new String();
       currentLine = sc.nextLine();
@@ -46,13 +49,21 @@ public class DataMining {
 
       if (!data.containsKey(lineArr[0])) {
         data.put(lineArr[0], new CompanyData(lineArr[0]));
+        tickerList.add(lineArr[0]);
       }
 
       String date = lineArr[1];
-      open = Double.valueOf(lineArr[2]);
+      close = Double.valueOf(lineArr[5]);
+
+      split = calcSplitDay(close, open);
+      if (split != null) {
+        String info = "" + split + " split on " + date + " " + close + " --> " + open;
+        data.get(lineArr[0]).addSplitDay(date, info);
+      }
+
       hx = Double.valueOf(lineArr[3]);
       lx = Double.valueOf(lineArr[4]);
-      close = Double.valueOf(lineArr[5]);
+      open = Double.valueOf(lineArr[2]);
       numShares = Integer.valueOf(lineArr[6]);
       adjustedClose = Double.valueOf(lineArr[7]);
 
@@ -61,16 +72,27 @@ public class DataMining {
       double percent = (hx - lx)/hx;
       // System.out.println("percent = " + percent);
       if (percent >= 0.15) {
-        data.get(lineArr[0]).addCrazyDay(date, percent);
+        percent = percent*100;
+        data.get(lineArr[0]).addCrazyDay(date, Math.round(percent*100.0)/100.0);
         // data.get(lineArr[0]).getCrazyDays();
       }
     }
+    Collections.sort(tickerList);
+    System.out.println(tickerList);
 
-    for (CompanyData company : data.values()) {
-      System.out.println("Processing: " + company.getCompany());
+    for (String company : tickerList) {
+      System.out.println("Processing: " + company);
       System.out.println("======================");
-      company.getCrazyDays();
+      data.get(company).getCrazyDays();
+      data.get(company).getSplitDays();
     }
+
+    // for (CompanyData company : data.values()) {
+    //   System.out.println("Processing: " + company.getCompany());
+    //   System.out.println("======================");
+    //   company.getCrazyDays();
+    //   company.getSplitDays();
+    // }
     // System.out.println("entryset: " + data.entrySet());
   }
 
